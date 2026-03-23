@@ -1,0 +1,1 @@
+This repository contains files and script for the article: "Whole forest in a pouch? Methods converge in uncovering wood ants’ fungal and bacterial microbiota" analysis. Script is written in R and titled "final_script.R". The rest of the files are datasets for the analysis.
