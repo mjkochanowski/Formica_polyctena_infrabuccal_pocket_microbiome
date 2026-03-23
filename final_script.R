@@ -28,7 +28,7 @@ ggplot(data = europe) +
   theme_minimal()
 
 #3 Microscopy
-mikro <- read.csv('mikroskop.csv')
+mikro <- read.csv('microscopy.csv')
 kruskal.test(nb_morph ~ nest, data = mikro)
 dunnTest(nb_morph ~ nest, data = mikro, method = "bh")
 
@@ -37,31 +37,31 @@ mikro_morph <- ggplot(mikro, aes(x = nest, y = nb_morph)) +
   labs(title = '', y = 'Number of Morphotypes', x = 'Nest ID')
 
 #4 Culture based method
-szalki <- read.csv('szalki.csv')
-szalki$nest <- factor(szalki$nest, labels = c('KOR', 'FAL', 'CHO', 'ZAB', 'ZIE'), levels = c('CHO', 'FAL', 'KOR', 'ZAB', 'ZIE'))
+cultures <- read.csv('cultures.csv')
+cultures$nest <- factor(cultures$nest, labels = c('KOR', 'FAL', 'CHO', 'ZAB', 'ZIE'), levels = c('CHO', 'FAL', 'KOR', 'ZAB', 'ZIE'))
 
 #4.a. CFU per sample
-kruskal.test(CFU ~ nest, data = szalki)
+kruskal.test(CFU ~ nest, data = cultures)
 
-plot1 <- ggplot(szalki, aes(x = nest, y = CFU)) +
+plot1 <- ggplot(cultures, aes(x = nest, y = CFU)) +
   geom_boxplot() +
   scale_y_log10() +
   labs(title = '', y = 'Fungal CFUs per IBP', x = expression(paste(italic("Formica polyctena"), " colony"))) +
   theme_minimal(base_size = 16) +
   stat_compare_means()
-ggsave("CFU_szalki_21.01.2025.png", plot1)
+ggsave("CFU_cultures_21.01.2025.png", plot1)
 
 #4.b. Number of morphotypes
-kruskal.test(nb_morph ~ nest, data = szalki)
+kruskal.test(nb_morph ~ nest, data = cultures)
 
-szalki_morph <- ggplot(szalki, aes(x = Nest, y = nb_morph)) +
+cultures_morph <- ggplot(cultures, aes(x = Nest, y = nb_morph)) +
   geom_boxplot() +
   labs(title = '', y = 'Number of Morphotypes', x = 'Nest ID')
 
 #5 Metabarcoding
 
 #5.a. Venn diagram
-venn <- read.csv('genus_poprawione_v3.csv')
+venn <- read.csv('genus.csv')
 set1 <- as.vector(venn$X18S)
 set2 <- as.vector(venn$ITS2)
 set3 <- as.vector(venn$ITS1)
